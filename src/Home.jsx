@@ -57,7 +57,7 @@ const toggleTheme = () =>{
 
 useEffect(() =>{
   const data = window.localStorage.getItem("Curr_Theme");
- if(data !== "dark") setTheme((data))
+ if(data !== "light") setTheme((data))
 },[]);
 
  useEffect(() =>{
@@ -122,7 +122,7 @@ return (
                     <i class="fi fi-rr-wind"></i>
                     <div className="wind">
                       <h3>{data.speed}km/h</h3>
-                      <p>wind</p>
+                      <p>Wind speed</p>
                     </div>
                   </div>
                 </div>
