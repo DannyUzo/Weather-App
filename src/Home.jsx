@@ -23,7 +23,7 @@ export default function Home() {
 
   const handleSearch = () => {
     if (currName !== "") {
-      const apiUrl = `http://api.weatherapi.com/v1/current.json?key=7958fa67b67340368ea193442230509&q=${currName}&aqi=yes`;
+      const apiUrl = `https://api.weatherapi.com/v1/current.json?key=7958fa67b67340368ea193442230509&q=${currName}&aqi=yes`;
       axios
         .get(apiUrl)
         .then((res) => {
