@@ -57,7 +57,7 @@ const toggleTheme = () =>{
 
 useEffect(() =>{
   const data = window.localStorage.getItem("Curr_Theme");
- if(data !== "light") setTheme((data))
+ if(data !== "dark") setTheme((data))
 },[]);
 
  useEffect(() =>{
