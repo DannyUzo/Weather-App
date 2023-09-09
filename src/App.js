@@ -1,15 +1,12 @@
+import WeatherApp from "./views";
 
 import "./App.css";
-import Home from "./Home";
 
 function App() {
- 
   return (
-    <>
-      <div className="App">
-        <Home/>
-      </div>
-    </>
+    <div className="App">
+      <WeatherApp />
+    </div>
   );
 }
 
