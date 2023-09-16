@@ -28,10 +28,10 @@
   border-radius: 5px;
   background-color: #aaaaac;
 }
-#light{
+#light {
   background-color: white;
 }
-#dark{
+#dark {
   background-color: rgb(2, 2, 46);
 }
 #dark .container {
@@ -45,9 +45,8 @@
   margin: 0;
   height: 100vh;
   background-color: white;
-
 }
-.navbar{
+.navbar {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -71,13 +70,14 @@
   font-size: 20px;
   text-align: center;
 }
-.ThemeSwitch{
- align-self: center;
- display: flex;
+.ThemeSwitch {
+  align-self: center;
+  display: flex;
 }
-.main{
+.main {
   width: 100%;
   padding: 10px;
+  margin-top: 30px;
   box-sizing: border-box;
   justify-content: space-evenly;
   align-items: center;
@@ -154,7 +154,7 @@
   margin-right: 12px;
   border-radius: 30px;
 }
-.search button {
+ #dark .search button {
   border: none;
   outline: 0;
   background-color: #06276a;
@@ -163,12 +163,21 @@
   border-radius: 50%;
   cursor: pointer;
 }
+ #light .search button {
+  border: none;
+  outline: 0;
+  background-color: rgb(87, 124, 177);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+}
 .search button i {
   color: white;
 }
-.header{
+.header {
   text-align: center;
-  background:#011844;
+  background: #011844;
   color: white;
   box-sizing: border-box;
   margin: 0 auto;
@@ -177,8 +186,16 @@
   font-size: 12px;
   font-weight: 100;
 }
-.header h2{
+#dark .header h2 {
   background-color: rgba(255, 255, 255, 0.2);
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-transform: capitalize;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+}
+#light .header h2 {
+  background-color: rgb(154, 190, 238);
   padding: 5px 10px;
   border-radius: 5px;
   text-transform: capitalize;
@@ -233,7 +250,6 @@
   margin: 0;
 }
 .MoreInfo{
-  border: 1px solid gold;
   width: 500px;
  max-height: 450px;
   overflow-y: scroll;
@@ -261,7 +277,6 @@
 
 #dark .ForeCast{
   margin-top: 0;
-  border: 1px solid green;
   position: relative;
   width: 100%;
   padding: 10px;
@@ -272,13 +287,14 @@
 }
 #light .ForeCast{
   margin-top: 0;
-  border: 1px solid green;
   position: relative;
   width: 100%;
   padding: 10px;
   display: flex;
   flex-direction: column;
+  background-color: rgba(21, 74, 190, 0.2);
   justify-content: space-between;
+  border-radius: 10px;
 }
 .Hourly-Info{
   display: flex;
@@ -292,7 +308,7 @@
   padding: 10px;
   /* border: 1px solid white; */
 }
-.foreCast-btn{
+#dark .foreCast-btn{
   border: none;
   outline: none;
   background-color: #1b305b;
@@ -301,9 +317,17 @@
   float: left;
   border-radius: 5px;
 }
+#light .foreCast-btn{
+  border: none;
+  outline: none;
+  background-color: rgb(20, 67, 128);
+  color: white;
+  padding: 5px;
+  float: left;
+  border-radius: 5px;
+}
 .Location{
   margin-top: 0;
-  border: 1px solid green;
   position: relative;
   width: 100%;
   padding: 10px;
@@ -350,12 +374,20 @@
   padding: 0px;box-sizing: border-box;
   width: 100%;
 }
-.showMoreInfo button{
+#dark .showMoreInfo button{
   width:fit-content;
   outline: none;
   border: none;
   border-radius: 3px;
   background-color: #011844;
+  color: white;
+}
+#light .showMoreInfo button{
+  width:fit-content;
+  outline: none;
+  border: none;
+  border-radius: 3px;
+  background-color: rgb(154, 190, 238);
   color: white;
 }
 hr{
@@ -388,13 +420,33 @@ hr{
   border: none;
 }
 .air-quality span{
-  color: #8c8c8e;
-  font-family: 'Times New Roman', Times, serif;
-  font-weight: 500;
+  color: #9a9aac;
+  font-size: 17px;
+  font-weight: 400;
+}
+.air-quality hr{
+  border: none;
+}
+.astro span{
+  color: #9a9aac;
+  font-size: 17px;
+  font-weight: 400;
+}
+.astro p{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: center;
+}
+.astro i{
+  font-size: 25px;
+}
+.astro hr{
+  border: none;
 }
 .error {
   color: rgb(238, 50, 50);
-  background-color: #282c34;
+  background-color: #40444e;
   border-radius: 5px;
   font-size: 15px;
   font-weight: 400;
@@ -421,26 +473,17 @@ hr{
 }}
 @media (max-width: 550px) {
  #dark .container{
-    height: 100%
+    height: 100%;
   }
  #light .container{
-    height: 100%;
+    height: 100vh;
   }
 .ThemeSwitch{
   position: absolute;
   top: 17px;
   right: 13px;
 }
-.weatherInfo {
-  box-sizing: border-box;
-  /* height: 100vh;  */
-  line-height: 16px;
-  position: relative;
-  padding: 10px;
-  width: auto;
-}
 .weather{width: 85%;}
-.MoreInfo{width: 85%;}
 #dark .search{
   display: flex;
   width: 100%;
@@ -465,6 +508,9 @@ hr{
   box-sizing: border-box;
   justify-content: space-between;
  }
+ .weatherInfo{
+  width: 100%;
+ }
 }
 @media (max-width: 450px){
   .Hourly-Forecast{
@@ -481,7 +527,6 @@ hr{
 @media (max-width: 350px){
   .Location{
     margin-top: 0;
-    border: 1px solid green;
     position: relative;
     width: 100%;
     padding: 10px;
