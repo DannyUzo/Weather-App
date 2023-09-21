@@ -170,7 +170,7 @@ export default function Home() {
                 onChange={toggleTheme}
                 checked={theme === "dark"}
               />
-              <label className="dark_mode_label" for="darkmode-toggle">
+              <label  htmlFor="k" className="dark_mode_label" for="darkmode-toggle">
                 <Sun />
                 <Moon />
               </label>

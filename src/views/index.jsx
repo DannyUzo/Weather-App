@@ -1,7 +1,8 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Clouds from '../assets/images/Clouds.png';
 import Map from "../assets/images/map.png";
+import Loader from "../components/ThemeSwitcher/Loader";
 import axios from "axios";
 
 import { API_KEY, WEATHER_APP_URL } from "../constants";
@@ -10,6 +11,9 @@ import ThemeSwitcher from "../components/ThemeSwitcher";
 export const ThemeContext = React.createContext(null);
 
 export default function WeatherApp() {
+
+const [loading, setLoading] = useState(false);
+
   const [data, setData] = React.useState({
     celcius: 0,
     name: "--",
@@ -59,8 +63,9 @@ export default function WeatherApp() {
   const [theme, setTheme] = React.useState("dark");
 
   const handleSearch = () => {
+
     if (currName !== "") {
-      const apiUrl = `${WEATHER_APP_URL}/forecast.json?key=1aac63b69ed94973b5c214639231509&q=${currName}&days=1&aqi=yes&alerts=yes`;
+      const apiUrl = `${WEATHER_APP_URL}/forecast.json?key=6785e1db561f441d92d120223232109&q=${currName}&days=1&aqi=yes&alerts=yes`;
 
       axios
         .get(apiUrl)
@@ -88,14 +93,14 @@ export default function WeatherApp() {
             moonset:res.data.forecast.forecastday[0].astro.moonset, 
             moonPhase:res.data.forecast.forecastday[0].astro.moon_phase, 
             UV:res.data.forecast.forecastday[0].day.uv,
-            CO:res.data.forecast.forecastday[0].day.air_quality.co,
-            NO2:res.data.forecast.forecastday[0].day.air_quality.no2,
-            O3:res.data.forecast.forecastday[0].day.air_quality.o3,
-            pm2:res.data.forecast.forecastday[0].day.air_quality.pm2_5,
-            pm10:res.data.forecast.forecastday[0].day.air_quality.pm10,
-            so2:res.data.forecast.forecastday[0].day.air_quality.so2,
-            GB_index:res.data.forecast.forecastday[0].day.air_quality["gb-defra-index"],
-            US_index:res.data.forecast.forecastday[0].day.air_quality["us-epa-index"],
+            CO:res.data.current.air_quality.co,
+            NO2:res.data.current.air_quality.no2,
+            O3:res.data.current.air_quality.o3,
+            pm2:res.data.current.air_quality.pm2_5,
+            pm10:res.data.current.air_quality.pm10,
+            so2:res.data.current.air_quality.so2,
+            GB_index:res.data.current.air_quality["gb-defra-index"],
+            US_index:res.data.current.air_quality["us-epa-index"],
             chance_of_rain:res.data.forecast.forecastday[0].day.daily_chance_of_rain,
             chance_of_snow:res.data.forecast.forecastday[0].day.daily_chance_of_snow,
             precipitation:res.data.forecast.forecastday[0].day.totalprecip_mm,
@@ -119,7 +124,7 @@ export default function WeatherApp() {
               res.data.forecast.forecastday[0].hour[19].condition.icon,
             Forecast_Time_temp_c3:
               res.data.forecast.forecastday[0].hour[19].temp_c,
-          });
+          })
           setError("");
         })
         .catch((err) => {
@@ -132,6 +137,10 @@ export default function WeatherApp() {
         });
     }
   };
+
+
+
+
   const toggleTheme = () => {
     setTheme((curr) => (curr === "dark" ? "light" : "dark"));
   };
@@ -148,7 +157,7 @@ export default function WeatherApp() {
 
   const [showmore, setShowmore] = useState(false);
 
-  const handleclick = (event) => {
+  const handleclick = () => {
     if (showmore === false) {
       setShowmore(true);
     } else {
@@ -156,6 +165,12 @@ export default function WeatherApp() {
     }
   };
 
+
+  const handleEnterSearch = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
@@ -170,6 +185,7 @@ export default function WeatherApp() {
                 type="search"
                 placeholder="Enter the name of your Town, City or Region"
                 onChange={(e) => setcurrName(e.target.value)}
+                onKeyDown={handleEnterSearch}
               />
               <button onClick={handleSearch}>
                 <i class="fi fi-rr-search"></i>
@@ -191,10 +207,11 @@ export default function WeatherApp() {
                   <p>{error}</p>
                 </div>
               )}
-
               {data && (
                 <div className="weatherInfo">
-                  <img src={data.Icon} alt="weather" />
+                  {loading && (<Loader/>) }
+                    <>
+                    <img src={data.Icon} alt="weather" />
                   <h4>{data.text}</h4>
                   <h1>{data.celcius}°c</h1>
                   <h5>{data.name}</h5>
@@ -214,8 +231,10 @@ export default function WeatherApp() {
                       </div>
                     </div>
                   </div>
+                  </>
+                  
                 </div>
-              )}
+               )} 
 
               {!data && <h1>No data to display here</h1>}
             </div>
@@ -244,7 +263,7 @@ export default function WeatherApp() {
                     <img src={data.Forecast_Time_icon3} alt="" />
                   </div>
                 </div>
-                <button className="foreCast-btn">Hourly Forecast</button>
+                {/* <button className="foreCast-btn">Hourly Forecast</button> */}
               </div>
               <div className="Location">
                 <div className="Stats">
@@ -274,7 +293,7 @@ export default function WeatherApp() {
                 </div>
               </div>
               <div className="showMoreInfo">
-                <button onClick={handleclick}>
+                <button id="btn" onClick={handleclick}>
                   More info <i class="fi fi-rr-caret-down"></i>
                 </button>
                 {showmore && (
